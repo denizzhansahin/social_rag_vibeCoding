@@ -1,0 +1,69 @@
+Neo4j’in işin içine girmesi demek, sistemi sadece bir "analiz aracı" olmaktan çıkarıp tam anlamıyla bir **"İstihbarat ve İlişki Ağı"** (Palantir Gotham tarzı) platformuna dönüştürmek demek. Python tarafındaki AI Core, artık sadece metinleri değil, bu metinlerin içindeki **ilişkileri** de Neo4j’e düğüm (node) ve kenar (edge) olarak işleyecek.
+
+İşte NestJS, Vite.js ve Python üçgeninde, Neo4j, Qdrant ve Postgres ile beslenen o devasa veri ve mimari dökümü;
+
+---
+
+## 🏗️ Vizyon Analitik: Full-Stack Veri Mimarisi
+
+Sistemin akışı şu şekilde olcak:
+1.  **Vite.js & NestJS:** Kullanıcıdan gelen tüm ham veriyi (log, post, puan) alır ve **PostgreSQL**'e yedekli olarak yazar.
+2.  **NestJS -> Python (FastAPI):** NestJS, yeni bir veri geldiğinde Python servisine "bu veriyi işle" emri gönderir.
+3.  **Python AI Core:** * Veriyi **Qdrant**'a atar (Semantik hafıza için).
+    * Veriden kişileri ve eylemleri ayıklayıp **Neo4j**'e bağlar (İlişki ağı için).
+    * **Ollama** ile bu verileri sentezleyip analiz üretir.
+
+
+
+---
+
+## 📊 En Küçük Detayına Kadar Veri Listesi (Data Points)
+
+Sistemin "kılcal damarları" diyebileceğimiz, toplanacak tüm veriler şunlar:
+
+### 1. Operasyonel & Disiplin Verileri (PostgreSQL)
+* **Zamanlama:** Giriş/çıkış saatleri, uyanma-kahvaltı arası geçen süre (hız analizi).
+* **Cihaz Bilgisi:** Uygulamaya hangi cihazdan bağlandığı (teknik yatkınlık göstergesi olabilir).
+* **Görev Metrikleri:** Verilen teknik taskların bitiş süresi, revize sayısı, mentorun verdiği 1-10 arası teknik puan.
+* **Log Verisi:** Uygulama içinde en çok hangi sayfada vakit geçiriyo? (Duyurular mı, sosyal akış mı?)
+
+### 2. Semantik & İçerik Verileri (Qdrant)
+* **Sosyal Postlar:** Katılımcının paylaştığı her cümlenin vektörel karşılığı.
+* **Mentor Yorumları:** "X kişisi bugün çok sessizdi" veya "Y kişisi grupta liderliği üstlendi" gibi serbest metinler.
+* **Soru-Cevap:** Katılımcının AI asistanına sorduğu soruların derinliği (Basit mi soruyo yoksa detaylara mı iniyo?).
+* **Duygu Analizi (Sentiment):** Yazılan mesajların altındaki stres, öfke veya mutluluk katsayısı.
+
+### 3. İlişkisel & Ağ Verileri (Neo4j - En Önemli Kısım)
+* **Etkileşimler:** Kim kimin postunu beğenmiş? (A -> LIKES -> B).
+* **Grup Dinamiği:** Kim hangi grupta kiminle çalışmış? (A -> WORKED_WITH -> B).
+* **Etki Alanı:** Kimin duyurusuna veya postuna en çok kimler tepki veriyo? (Doğal lider tespiti).
+* **Bağlantı Derinliği:** A ve B kişileri sadece aynı grupta mıydı yoksa dışarda da mı beraber takılıyolar? (Beacon verisiyle desteklenebilir).
+
+---
+
+## 🧠 Analiz ve Öneri Modülleri (Python & Ollama)
+
+Bu veriler toplandıktan sonra sistem şu çıktıları üretecek:
+
+### Yönetici Paneli İçin:
+* **Grup Optimizasyonu:** "A ve B kişilerini aynı gruba koyma, ikisi de baskın karakter, iş yavaşlar. C'yi ekle, o dengeleyici (mediator) olur."
+* **Risk Analizi:** "X katılımcısı son 2 gündür sosyal ağın dışında kalmış (Neo4j verisi) ve motivasyonu %20 düşmüş (Qdrant analizi). Müdahale gerekebilir."
+* **Yetenek Eşleştirme:** "Bu çocuk aslında yazılımcı diye gelmiş ama grafik analizine göre organizasyon kabiliyeti teknik bilgisinden daha yüksek."
+
+### Katılımcı Paneli İçin (Kişiselleştirilmiş):
+* **Gelişim Yolculuğu:** "Geçen haftaya göre teknik tartışmalara katılımın %40 artmış, harika gidiyorsun!"
+* **Ağ Önerisi:** "Seninle benzer ilgi alanlarına sahip (Qdrant benzerliği) ve daha önce aynı grupta olmadığın Y kişisiyle tanışmalısın."
+* **Özel Motivasyon:** "Bugün uyanma saatin biraz sarkmış ama kampın %80'i senin gibi uykusuz kalmış, yalnız değilsin!"
+
+---
+
+## 🛠️ Proje Yol Haritası (Kısa Özet)
+
+1.  **Veri Şeması:** Postgres (User/Log), Qdrant (Embeddings), Neo4j (Relations) tablolarını oluşturcaz.
+2.  **FastAPI AI Bridge:** Python tarafında Ollama ile konuşan ve bu 3 veritabanına veri dağıtan API'yı yazcaz.
+3.  **NestJS Orchestration:** Oturum yönetimi (JWT) ve Python servisine veri aktaran "Dispatcher" yapısını kurcaz.
+4.  **Vite.js Dashboard:** Hem katılımcı hem yönetici için bu karmaşık verileri **shadcn/ui** veya **Chart.js** ile basit grafiklere (radar chart, network graph) dökcez.
+
+> **Küçük bi teknik detay:** Neo4j tarafında `GraphRAG` kullanırsak, Ollama'ya sadece metinleri değil, bu metinlerin arasındaki ilişkileri de context olarak verebiliriz. Bu da analizlerin doğruluğunu %100 artırır.
+
+İstersen Python tarafında Neo4j'e düğüm ekleyen ve Qdrant'a vektör atan o temel **"Ingest Script"** taslağını hazırlamaya başlayabilirim. Ne dersin, kod mimarisine geçelim mi?

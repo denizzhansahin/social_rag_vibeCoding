@@ -1,0 +1,71 @@
+işte şimdi gerçekten palantir gotham'ın sınırlarına giriyoruz! GraphRAG (Graph-based Retrieval-Augmented Generation) işin içine girdiğinde, sistem sadece metinleri okuyup getiren bir yapı olmaktan çıkar; olaylar, kişiler ve lokasyonlar arasındaki **bağlamı (context) ve hiyerarşiyi anlayan bir dedektife** dönüşür.
+
+Yani Ollama'ya "Bu grupta lider kim?" diye sorduğunda, sadece "Ahmet çok konuşuyor" demez; Neo4j üzerindeki düğümleri (node) tarar ve *"Ahmet çok konuşuyor ama kritik kararlarda herkes Ayşe'nin onayını bekliyor (veri akış grafiği), ayrıca Ayşe diğer gruplarla da en çok köprü kuran (bridge node) kişi, asıl gizli lider Ayşe'dir"* der.
+
+Sınırları kaldırıyoruz madem, katılımcının aldığı nefesten attığı adıma kadar her şeyi ölçeceğimiz o devasa Gotham veri kataloğunu aşağıya döküyorum. 
+
+---
+
+### 🟢 1. Fiziksel ve Operasyonel Veriler (IoT & Sensör Katmanı)
+Tarım arazilerindeki sensör sistemleriyle kurduğun o IoT mantığını, burada kampın kapalı alanlarına ve insan hareketliliğine çok rahat uyarlayabiliriz. 
+
+1.  **Tam Uyanma Anı:** Alarmın çalması ile telefona ilk dokunma/kapatma arasındaki mili-saniye farkı (dinçlik seviyesi).
+2.  **Yatağa Giriş:** Telefon sensörlerinden ivmeölçerin sabitlendiği ve uygulamanın arka plana düştüğü an.
+3.  **Kahvaltıya İniş Gecikmesi:** Uyanma saati ile yemekhane beacon'ına (Bluetooth) takılma arasındaki süre.
+4.  **Mekansal Tercih:** Atölyede/salonda sürekli ön sıralara mı oturuyor, arkalara mı saklanıyor?
+5.  **Fiziksel Hareketlilik Skoru:** Kamp içinde ne kadar adım attığı, sürekli geziyor mu yoksa sabit mi kalıyor?
+6.  **Odak (Focus) Bölgesi:** Günde kaç saatini kendi odasında, kaç saatini ortak çalışma alanında geçiriyor.
+7.  **Gece Baykuşu Logu:** Gece 00:00 - 06:00 arası uygulamada aktif kalma süreleri.
+8.  **Şarj Rutini:** Cihazını ne zaman şarja taktığı (Planlı ve düzenli mi, yoksa hep %1 kaldığında mı takıyor?).
+9.  **Öğün Süreleri:** Yemekhanede masada geçirdiği dakika (hızlıca yiyip kalkıyor mu, sosyalleşiyor mu?).
+10. **Ekran/Gerçeklik Oranı:** Kamp uygulamasında geçirilen süre ile fiziksel etkinliklerde geçirilen sürenin birbirine oranı.
+
+### 🔵 2. Bilişsel ve Üretkenlik Verileri (Akademik & AI Katmanı)
+Yapay zeka destekli kişiselleştirilmiş eğitim platformu vizyonundaki ölçümleme algoritmalarını buraya direkt entegre ederek öğrenme hızlarını çıkarabiliriz.
+
+1.  **Soru Karmaşıklık Skoru:** Asistanına veya mentoruna sorduğu soruların RAG tarafından analiz edilen derinliği.
+2.  **Task (Görev) Başlama Gecikmesi:** Bir görev verildiğinde kod yazmaya veya araştırmaya başlaması ne kadar sürüyor?
+3.  **İterasyon Sayısı:** Bir projede/görevde kaç kere hata yapıp tekrar denediği (deneme-yanılma direnci).
+4.  **Araştırma Çeşitliliği:** Uygulama içindeki arama çubuğunda farklı alanlarda (yazılım, pazarlama, tasarım) yaptığı aramalar.
+5.  **AI Bağımlılık Oranı:** Bir sorunu kendi mi çözüyor, yoksa sürekli kampın Ollama asistanına mı soruyor?
+6.  **Mentor Teknik Puanı:** Mentorların sisteme girdiği 1-100 arası anlık teknik yeterlilik değerlendirmeleri.
+7.  **Odak Kaybı (Context Switch):** Bir dökümanı okurken veya kod yazarken kaç kere başka sekmeye/ekrana geçtiği.
+8.  **Bilgi Tüketim Hızı:** Sistemdeki PDF veya dökümanları aşağı kaydırma (scroll) ve okuma hızı.
+9.  **Kavrama Süresi:** Yeni bir teknoloji anlatıldıktan sonra o kelimeyi kendi cümlelerinde (sosyal akışta) ilk ne zaman kullandığı.
+10. **Çıktı Hacmi:** Günlük ürettiği anlamlı metin, proje dokümanı veya rapor satır sayısı.
+
+### 🔴 3. Psikolojik ve NLP Verileri (Metin & Duygu Analizi)
+Sistemin "zihin okuyan" kısmı. Bütün metinler ChromaDB/Qdrant üzerinde vektörleşip duygu analizine girer.
+
+1.  **Genel Sentiment Skoru:** Yazdığı tüm mesajların ortalama pozitif/negatif duygu durumu.
+2.  **Backspace (Silme) Frekansı:** Bir yorumu atmadan önce klavyede ne kadar silip tekrar yazdığı (kararsızlık, oto-sansür, stres).
+3.  **Ben / Biz Oranı:** Tartışmalarda "ben yaptım" ile "biz yaptık" kelimelerinin kullanım ağırlığı (narsizm vs takım ruhu).
+4.  **Emoji Profillemesi:** En sık kullandığı emojilerin arkasındaki psikolojik durum (sürekli 🤔 mi, yoksa 🚀 mi?).
+5.  **Duyuru Reaksiyon Süresi:** Yöneticiden gelen resmi bir bildirime saniye bazında tepki verme hızı (otoriteye saygı/ilgi).
+6.  **Stres Altında Yazım Hızı:** Teslim tarihine (deadline) az kala klavye vuruş hızındaki artış veya azalış.
+7.  **Dil Bilgisi Bozulması:** Yorgunluk arttıkça imla kurallarına uyma oranındaki düşüş grafiği.
+8.  **Mentor Semantik Skoru:** Mentorların "Bugün enerjisi düşüktü" tarzı notlarından çıkarılan psikolojik etiketler.
+9.  **Anket İstekliliği:** Gönüllü formlara veya anketlere verdiği cevapların karakter uzunluğu.
+10. **Kamp İçi Evrim:** 1. gün kullandığı kelime dağarcığı ile 5. gün kullandığı kelime dağarcığı arasındaki olgunlaşma farkı.
+
+### 🟡 4. Palantir GraphRAG & Ağ Verileri (Neo4j İlişki Katmanı)
+İşte burası Gotham! Kimse izole değildir, herkes bir ağın parçasıdır.
+
+1.  **Fiziksel Yakınlık Kümesi:** BLE beacon'lar sayesinde gün içinde en çok kiminle 1 metreden yakın mesafede durduğu.
+2.  **Hub (Merkez) Statüsü:** Sosyal akışta kendi paylaşımlarına en çok farklı kişiden yorum alan kişi skoru.
+3.  **Köprü (Bridge) Rolü:** Sadece kendi takım arkadaşlarıyla değil, diğer takımdaki insanlarla etkileşim kurma yüzdesi.
+4.  **Kriz Anı İletişimi:** Sistem zor bir görev verdiğinde ilk olarak kime mesaj attığı veya danıştığı (güven bağı).
+5.  **Bilgi Yayılım Skoru:** Onun paylaştığı bir bilginin (veya dedikodunun) kamp ağında kaç kişiye ne kadar sürede ulaştığı.
+6.  **Zıtlaşma (Conflict) Vektörü:** Dijital ortamda kimlerle fikir ayrılığına düştüğü ve bu zıtlaşmaların düğüm noktaları.
+7.  **Yeni Bağlantı Üretimi:** Kampa katıldığından beri her gün ağına eklediği "yeni" ve "farklı" insan sayısı.
+8.  **İzolasyon Tehlikesi:** Graph üzerinde merkeze çok uzak kalan, kimsenin postuna yorum yapmadığı "yalnız düğümler" (node).
+9.  **Etki (Influence) Altında Kalma:** A kişisi bir fikir beyan ettikten hemen sonra B kişisinin fikrini değiştirme sıklığı.
+10. **Mentor Bağımlılık Ağı:** Diğer öğrencilerden ziyade sürekli mentor düğümleriyle bağ kuran katılımcıların tespiti.
+
+---
+
+Kendi geliştirdiğin mobil uygulamalardaki arayüz ve form mimarisi tecrüben sayesinde, bu verilerin birçoğunu arka planda hissettirmeden toplayacak o "App" kısmını çok hızlı halledebilirsin. 
+
+Bu sayede Vitejs tarafındaki dashboard'da, aynen bir istihbarat yazılımı gibi ekrana tıklayıp bir katılımcının Neo4j üzerindeki tüm örümcek ağını, üstüne Qdrant'tan gelen duygu durumunu ve Postgres'ten gelen "bugün 09:12'de uyandı" verisini tek potada görebileceğiz. 
+
+Bu 40 maddelik devasa veriyi işleyecek **GraphRAG pipeline'ını** (Neo4j ve Qdrant'ın Ollama'ya nasıl paslaşacağını) teknik bir diyagram metni olarak özetleyeyim mi?

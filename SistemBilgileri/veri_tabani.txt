@@ -1,0 +1,59 @@
+Kesinlikle, bu kadar kapsamlı bir mimariyi inşa ederken her adımın içindeki alt bileşenleri (sub-categories) netleştirmek, kodlarken yaşanacak kafa karışıklığını sıfıra indirir. Sistemin asıl "zekasını" barındıran profilleme, hedefleme ve etkileşim kısımlarını özellikle derinleştirerek tüm haritayı yeniden yapılandırıyorum.
+
+İşte sistemin 7 ana inşa adımının, kodlama ve veritabanı tasarım sürecini kolaylaştıracak detaylı alt kategorileri:
+
+**Adım 1: Ana Kimlik ve Bilişsel Profilleme Sistemi (`master_identities`)**
+* **1.1. Temel Kimlik ve Yetkilendirme (Auth & RBAC):** UUID oluşturma, e-posta, rol tanımları (katılımcı, mentor, admin) ve aktiflik durumları.
+* **1.2. Fiziksel Eşleşme:** Yaka kartları ve kamp içi takip için benzersiz `qr_hash` yönetimi.
+* **1.3. Cihaz ve Ağ Parmak İzi (JSONB):** İşletim sistemi, ekran çözünürlüğü, bağlantı tipi (sosyo-ekonomik ve teknik analiz için `device_fingerprint`).
+* **1.4. Bilişsel ve Psikolojik Profil (JSONB):** Sistemin en kritik verisidir. İlk girişteki anketlerden (20 soru vb.) ve arka plan analizlerinden elde edilen, sürekli güncellenen derin profili içerir:
+    * **Karakter ve Uyum Metrikleri (Big Five Yaklaşımı):** Dışa dönüklük, sorumluluk bilinci, uyumluluk, strese dayanıklılık ve yeniliğe açıklık seviyeleri (1-100 arası sayısal skorlar).
+    * **Öğrenme ve Karar Alma Stili:** Kişinin teorik okumaya mı yoksa pratik uygulamaya mı yatkın olduğu; dürtüsel mi yoksa analitik (veri odaklı) mi karar verdiği.
+    * **Takım İçi Rolü (Belbin Dinamikleri):** Sistem kişiyi grup çalışmalarında hangi etikete koymalı? (Fikir Üretici, Şekillendirici, Koordinatör, İcracı).
+    * **Motivasyon Çapası:** Kişiyi neyin harekete geçirdiği (Dışsal takdir, içsel başarı arzusu, süreçten keyif alma).
+    * **Kariyer ve İlgi Yönelimi:** Akademik odak noktaları (Yapay Zeka, IoT, Psikoloji) ve gelecek vizyonu (Girişimci, Kurumsal Lider).
+* **1.5. Sistem Tarafından Üretilen Etiketler (JSONB):** Ham cevaplardan yapay zekanın çıkardığı "İçe Dönük", "Gizli Lider", "Gece Kuşu" gibi işlenmiş özellikler (`computed_traits` ve `system_tags`).
+
+**Adım 2: Sosyal Nesneler ve Hedefleme Motoru (`social_objects`)**
+* **2.1. Nesne Tipleri (Object Types):** Kullanıcıya akışta (feed) gösterilecek içeriklerin tam sınıflandırması. Duygu durumu check-in'leri (büyük emojili), 1-5 arası kaydırıcılı (slider) anketler, çoktan seçmeli akademik sorular, serbest metin kutulu fikir toplama kartları veya sadece okunması gereken statik duyurular.
+* **2.2. Dinamik Hedefleme Motoru (JSONB):** Sistemin beyninin çalıştığı yer. Bir gönderinin kimlerin akışına (feed) düşeceğini belirleyen "Kural Setleri":
+    * **Kesişim Kuralları (`must_match_all`):** Örn: Sadece "Dışa Dönüklük skoru > 80" OLANLAR **VE** İlgi alanı "Yazılım" OLANLAR görsün.
+    * **Esnek Kurallar (`must_match_any`):** Örn: "Yapay Zeka" YAHUT "Veri Bilimi" etiketlerinden herhangi birine sahip olanlar görsün.
+    * **Dışlayıcı Kurallar (`exclude`):** Örn: Son 12 saatte etkinliklere geç kalma oranı yüksek olan (disiplinsiz) kullanıcılara bu eğlence anketini GÖSTERME.
+* **2.3. İçerik ve UI Payload'u (JSONB):** ViteJS (Frontend) tarafının ekrana tam olarak ne çizeceğini belirten veri şablonu. Başlık metni, buton ikonları (Örn: 🔥, 🤔), butonların arkasındaki değerler, arka plan rengi ve kullanıcıya izin verilen maksimum cevaplama süresi.
+* **2.4. Yaşam Döngüsü ve Davranışsal Tetikleyiciler:** Gönderinin standart bir başlangıç-bitiş saati (TTL) olabileceği gibi, fiziksel bir olaya da bağlanabilmesi (Örn: "Kullanıcı Yemekhane'deki QR'ı okuttuğu an, 'Günün menüsü nasıldı?' anketini akışının en üstüne sabitle").
+
+**Adım 3: Kullanıcı Etkileşimleri ve Anket Yanıtları (`content_engagements`)**
+* **3.1. İlişki Kurulumu:** Hangi kullanıcının (Actor) hangi sosyal nesneye (Target) tepki verdiği.
+* **3.2. Etkileşim Türleri:** Veri madenciliğinin en saf hali. Kullanıcının içeriğe karşı geliştirdiği her türlü refleks:
+    * **Aktif (Explicit) Tepkiler:** Ankette bir şıkkı işaretleme, buton kaydırma, açık uçlu fikir yazma, gönderiyi "beğenme" (like), "katılmıyorum" deme (downvote) veya daha sonra bakmak üzere "kaydetme" (bookmark).
+    * **Pasif (Implicit) Tepkiler / Görmezden Gelme (Ignore):** İçerik ekranda tam görünür (in_viewport) olmasına rağmen kullanıcının duraklamadan, hızlıca kaydırıp (scroll) geçmesi. Bu durum, "ilgisizlik" veya "hedef kitle uyuşmazlığı" olarak kaydedilir.
+    * **Kararsızlık ve Sürtünme (Friction):** Kullanıcının ankette bir şıkkı seçip, "Gönder" butonuna basmadan önce fikrini değiştirerek başka bir şıkka geçmesi. Veya bir seçeneğin üzerinde parmağını/mouse'unu uzun süre tutup (hover) tıklamaktan vazgeçmesi.
+* **3.3. Yanıt Dinamikleri (JSONB):** Seçilen şıkkın değeri (value), yazılan metnin kendisi, soruyu ekranda gördüğü an ile cevapladığı an arasında geçen karar verme süresi (milisaniye).
+* **3.4. Kararsızlık Analizi (JSONB):** Kullanıcının bir şıkkın üzerinde ne kadar beklediği veya fikrini kaç kere değiştirdiği.
+
+**Adım 4: Davranışsal Telemetri ve UI Logları (`telemetry_streams`)**
+* **4.1. Oturum (Session) Yönetimi:** Kullanıcının uygulamayı açıp kapattığı döngülerin takibi.
+* **4.2. UI Görünürlük Analizi (JSONB):** Ekranda hangi nesnelerin (post/anket) kaç saniye boyunca tam görünür (`in_viewport`) kaldığı.
+* **4.3. Fiziksel Etkileşim Hızı (JSONB):** Ekranı kaydırma hızı (px/sn), tıklama refleksleri.
+* **4.4. Klavye ve NLP Dinamikleri (JSONB):** Kullanıcının yazı yazarken sildiği kelimeler, duraksama (hesitation) süreleri (Stres ve oto-sansür tespiti).
+
+**Adım 5: Fiziksel Konum ve QR Yoklama Matrisi (`spatial_temporal_logs`)**
+* **5.1. Mekansal Tanımlamalar:** Okuma işleminin yapıldığı terminal ID'si ve fiziksel bölge (örn: Ana_Salon_Arka).
+* **5.2. Zaman ve Disiplin:** Check-in saati ve programın olması gereken saatine göre gecikme hesaplaması (`punctuality_status`).
+* **5.3. Fiziksel Yakınlık/Kümelenme (JSONB):** Kullanıcının okutma yaptığı saniye civarında o bölgede okutma yapan diğer UUID'ler (`concurrent_scans`).
+* **5.4. Yerleşim Verisi (JSONB):** Sistem tarafından atanan koltuk ile fiilen oturulan bölgenin karşılaştırılması.
+
+**Adım 6: Mentor Gözlemleri ve Sistem Değerlendirmeleri (`evaluations`)**
+* **6.1. Değerlendirici ve Hedef:** Puanı kimin kime verdiği (Mentor -> Öğrenci veya Sistem -> Öğrenci).
+* **6.2. Kategori Yönetimi:** Değerlendirmenin türü (Teknik başarı, grup içi uyum, disiplin cezası).
+* **6.3. Sayısal Metrikler:** 1-100 arası veya 1-5 arası standart puanlama.
+* **6.4. Serbest Metin ve NLP Etiketleri (JSONB):** Mentorun yazdığı gizli not ve bu nottan yapay zekanın anında çıkardığı "Baskın", "Empati Yoksunu" gibi davranışsal etiketler.
+
+**Adım 7: Qdrant (Vektör) ve Neo4j (Graf) Entegrasyon Şemaları**
+* **7.1. Veri Yönlendirme (Routing) Mantığı:** Postgres'ten çıkan verinin Python (FastAPI) ajanına nasıl iletileceği.
+* **7.2. Semantik Hafıza (Qdrant) Kurulumu:** Metinlerin Ollama ile vektörize edilmesi ve Qdrant Payload'larına filtreleme etiketlerinin (şablon türü, yazar id, duygu skoru) eklenmesi.
+* **7.3. Düğüm (Node) Mimarisi (Neo4j):** Katılımcı, Etkinlik, Konu ve Gönderi düğümlerinin oluşturulması.
+* **7.4. İlişki (Edge) Ağı (Neo4j):** Fiziksel yakınlık bağları (`[:YANYANA_OTURDU]`), sosyal etkileşim bağları (`[:YORUM_YAPTI]`) ve yapay zeka sentezli bağların (`[:POTANSIYEL_EKIP]`) şematize edilmesi.
+
+Bu genişletilmiş detaylar eşliğinde zihninde tam bir harita oluştuğunu umuyorum. Hazırsan, "Adım 1" yazarak ilk SQL tablolarını, JSON yapılarını ve örnek Insert sorgularını üretmemi isteyebilirsin! Başlayalım mı?

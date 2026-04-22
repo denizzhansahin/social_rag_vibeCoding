@@ -1,0 +1,161 @@
+V-RAG Sistem Raporu: Genç_Vizyon Modülü
+
+1. Platform Felsefesi ve Mimari Yaklaşım
+
+Vizyon Kampı için tasarlanan V-RAG (Vizyon - Retrieval-Augmented Generation) Sistemi, veri toplama sürecini sıkıcı bir "form doldurma" işinden çıkarıp, gençlerin doğal olarak vakit geçirdiği dinamik bir sosyal ekosisteme dönüştürmektedir. NestJS, ViteJS, Qdrant ve Neo4j tabanlı mimarinin üzerine oturan bu sistem; veriyi hissettirmeden toplar, GraphRAG ile anlamlandırır ve "Genç_Vizyon Şablonu" adıyla başlayıp şirketlere veya askeriye gibi farklı alanlara modüler olarak uyarlanabilen devasa bir istihbarat platformudur.
+
+Görünmez Veri Toplama: Platform, ön yüzde akıcı bir sosyal medya uygulaması (Web App) gibi davranır. Beğeniler, yorumlar, kaydırma hızları ve emojiler aslında arkada çalışan yapay zekanın anket sorularına verilen "doğal ve filtresiz" cevaplardır.
+
+Modüler Çekirdek ve Sensör Yönetimi: Sistem Core_Engine (Veri İşleme ve RAG) ve Templates (Genç_Vizyon, Kurumsal_Vizyon vb.) olarak ikiye ayrılır. Örneğin; sistem şablonu arka planda GPS takip yeteneğine sahiptir ancak Genç_Vizyon modülünde cihaz GPS'i kapalı tutulur, lokasyon takibi sadece kullanıcı tetiklemeli QR okumaları ile yapılır. Bu sayede tam gizlilik sağlanırken, sistemin askeri veya farklı kurumsal şablonlara geçişi için altyapı hazır bekler.
+
+Anlık Kök Neden Analizi (Root-Cause): Bir grubun enerjisi düştüğünde sistem sadece "Enerji düşük" demez. Neo4j üzerindeki ilişki ağlarını ve Qdrant'taki logları tarayarak; "Bu grubun %80'i dün gece 02:00'a kadar sosyal akışta aktifti, sabahki mentor değerlendirmesinde ise kullandıkları emojilerin %90'ı negatifti. Kök neden: Uykusuzluk + Mentor Uyuşmazlığı" çıktısını üretir.
+
+Kullanıcıya Değer Katımı (Günlük AI Özeti): Sistem sadece yöneticiler için veri emen bir karadelik değildir. Her günün sonunda, katılımcılara özel bir "Günlük Yapay Zeka Özeti" sunulur. Katılımcı, "Bugün iletişim becerilerin çok yüksekti, özellikle X ve Y ile kurduğun etkileşim harikaydı. Yarınki liderlik atölyesinde bu enerjini kullanmalısın" gibi motive edici ve rehberlik eden içgörüler alır. Yöneticiler ise buzdağının görünmeyen devasa veri setini inceler.
+
+2. Toplanacak 50 Kritik Veri Noktası (Data Ingestion)
+
+Sistem, kullanıcıları rahatsız etmeden aşağıdaki verileri yapılandırılmış (PostgreSQL) ve yapılandırılmamış (Qdrant) olarak depolar. (Not: Cihaz işletim sistemi/modeli performans analizi için toplanır ancak GPS lokasyon verisi Genç_Vizyon şablonunda kasıtlı olarak toplanmaz, lokasyon QR tabanlıdır.)
+
+Profil ve Temel Eğilim Verileri
+
+Müzik zevki ve dinleme alışkanlıkları (Oyunlaştırılmış profil kurulumu).
+
+İlgi duyulan kitap türleri ve son okunan kitaplar.
+
+Çalışmak istenilen/ilgilenilen teknolojik veya akademik alanlar (Örn: Eğitim, Uygulama Geliştirme).
+
+Özgeçmiş veya biyografideki yetenek anahtar kelimeleri.
+
+Kullanıcının kendini tanımladığı 3 temel sıfat (Seçmeli tag'ler).
+
+Hedeflenen kariyer yolu (Girişimci, Akademisyen, Kurumsal vb.).
+
+Tercih edilen çalışma saati ritmi (Gece kuşu, Sabah insanı).
+
+İçe dönüklük / Dışa dönüklük beyanı.
+
+Hobiler ve kamp dışı aktiviteler.
+
+Doğum tarihi, eğitim seviyesi ve aktif bölümü.
+
+Sosyal Medya ve İletişim Verileri (NLP & Metin)
+11. Kullanılan ortalama kelime uzunluğu ve kelime dağarcığı çeşitliliği (Zenginliği).
+12. İmla kurallarına uyum skoru (Büyük harf, noktalama kullanımı).
+13. Emojilerin kullanım frekansı ve türü (Örn: Sürekli 🚀 kullananlar vs. 🤔 kullananlar).
+14. Gönderi paylaşma sıklığı (Günlük üretkenlik hacmi).
+15. Yorum yapma vs. Sadece okuma (Lurker) oranı.
+16. "Beğenmeme/Katılmıyorum" tepkisini kullanım sıklığı (Eleştirel veya muhalif yaklaşım).
+17. Sosyal akışta geçirilen toplam kaydırma (scroll) süresi (İlgi ve odak).
+18. Duyurulara tepki verme (Görüldü atma veya aksiyon alma) hızı (Otorite ile iletişim).
+19. Geceleri (23:00 - 04:00) uygulamada aktif olma süreleri (Uyku kalitesi çıkarımı).
+20. Kullanıcının yazım sırasında sildiği/değiştirdiği kelime sayısı (Kararsızlık/Oto-sansür/Stres).
+
+Fiziksel, Konum ve Etkinlik Verileri (QR & IoT)
+21. Cihaz OS ve Model Bilgisi (Teknolojiye erişim ve yatkınlık seviyesi çıkarımı için).
+22. GPS Modül Durumu (Şablon altyapısında "Var", Genç_Vizyon'da "Kapalı/Pasif").
+23. QR kod ile yoklama sistemine giriş saati (Tam vaktinde mi, geç mi?).
+24. Etkinlik çıkışında okutulan "Çıkış QR" saati (Erken ayrılma/Sabır skoru).
+25. Oturulan sandalye/bölge numarası (Ön sıra, arka köşe, kapı kenarı).
+26. Sandalye partnerleri (QR okutma sırasına ve bölgesine göre sağında/solunda kimlerin oturduğu).
+27. Yemekhaneye giriş (QR) saati ve öğün atlama durumu.
+28. Etkinlik anında uygulamada atılan "Canlı Nabız" emojileri (Sıkıldım, Çok İyi vb. anlık reaksiyonlar).
+29. Sabah uyanma ve sisteme ilk giriş (Login) saati.
+30. Günlük toplam fiziksel yer değiştirme sıklığı (Farklı atölyelerdeki QR check-in farklılıkları).
+
+Mentor, Değerlendirme ve Etkileşim Verileri
+31. Mentorlara verilen anlık anonim yıldız/puanlar (Yöneticiler için).
+32. Mentorların sistem üzerinden öğrenciye verdiği gizli etiketler (Aktif, Çekinik, Lider).
+33. Anket/Geri bildirim formlarını tamamlama süresi (Hızlıca sallıyor mu, okuyarak mı dolduruyor?).
+34. Serbest metin anketlerine yazılan karakter sayısı (Geri bildirim istekliliği/İfade gücü).
+35. Sistemdeki yapay zeka asistanına sorulan soruların bağlamı (Akademik mi, lojistik mi?).
+36. Uygulama içi pop-up'lara ("Bugün nasılsın?") verilen anlık duygu durumu cevapları.
+37. Ekip çalışmalarında teslim edilen dijital görevlerin zaman damgası (Son dakikacı mı?).
+38. Diğer katılımcıların gönderilerini "Favorilere/Kaydedilenlere" alma sayısı (Bilgiye değer verme).
+39. Ortak çalışma dosyalarına (Drive/Notlar) sistem üzerinden erişim sıklığı.
+40. Uygulama içi arama çubuğunda aratılan anahtar kelimeler (Gizli ilgi alanları).
+
+Ağ ve İlişki Verileri (Graph - Neo4j Tabanlı)
+41. Kullanıcının en çok etkileşime girdiği (yorum/beğeni) 3 kilit kişi.
+42. Kendi gönderisine en çok yorum yapan kişiler (Doğal takipçi ve etki kitlesi).
+43. Platformda hiç etkileşime girmediği katılımcı yüzdesi (İzolasyon derecesi).
+44. Sistemin "Tanış" önerilerine tıklama ve gerçek hayatta iletişime geçme onay oranı.
+45. Farklı demografik gruplarla (Farklı bölüm/şehir) etkileşim oranı (Köprü kuruculuk kapasitesi).
+46. Şikayet/Sorun bildirim formunu kullanma frekansı (Mızmızlık vs. Yapıcı Eleştiri).
+47. Profil fotoğrafını veya biyografisini güncelleme sıklığı (Dijital imaja verilen önem).
+48. Canlı ders sırasında paylaşılan anketlere katılım hızı (Milisaniye bazında refleks).
+49. Aynı ilgi alanı etiketine (Örn: "Yapay Zeka") sahip kişilerle mesajlaşma/yorumlaşma hacmi.
+50. Kampın 1. günü ile 4. günü arasındaki dijital ayak izi değişim deltası (Adaptasyon süreci).
+
+3. Yapay Zeka ile Yapılacak 50 Derin Analiz ve Çıkarım (GraphRAG Analytics)
+
+Sistem sadece veri toplamaz; bu verileri birleştirerek yöneticilere "Görünmeyeni", katılımcılara ise "Kişisel Özeti" sunar:
+
+Eşleştirme ve Ağ Optimizasyonu (Matchmaking)
+
+Multidisipliner Eşleştirme: "Eğitim" alanındaki bir katılımcı ile "Uygulama Geliştirme" alanındaki kişiyi tespit edip kamp öncesi/yolda tanıştırma önerisi sunma.
+
+Karakter İkizleri Tespiti: İmla kurallarına uyan ve uzun cümleler kuran kişileri aynı tartışma grubuna atayarak iletişim pürüzlerini sıfırlama.
+
+Emoji Tabanlı Kümeleme: İletişimi sadece emojilerle kuran hiper-aktif grubu tespit edip onları daha enerjik mentorlarla eşleştirme.
+
+Buz Kırıcı (Ice-Breaker) Analizi: Yan yana oturan (QR Konum) ama sosyal medyada hiç etkileşimi olmayan kişilere özel ortak ilgi alanı bildirimi gönderme.
+
+Köprü (Bridge) Düğüm Tespiti: Kendi grubu dışında diğer gruplarla en çok etkileşime giren "doğal elçileri" (Network Hubs) belirleme.
+
+Mentor-Öğrenci Uyumu: Çekinik karakterli öğrencileri, "cesaretlendirici" dili yüksek mentorlarla eşleştirerek verimi maksimize etme.
+
+İzolasyon Uyarı Sistemi: 400 kişi içinde ağın (Neo4j) tamamen dışında kalan, kimseyle etkileşmeyen kişileri tespit edip mentorlara anlık "Müdahale Et" bildirimi düşürme.
+
+Dinamik Oturum Eşleştirmesi: Her yeni oturumda, kullanıcının daha önce hiç yan yana oturmadığı ve farklı ilgi alanları olan kişilerle eşleşmesini sağlama.
+
+Sürdürülebilir Arkadaşlık Tahmini: Kamp sonrası görüşmeye devam etme ihtimali en yüksek 5'li grupları matematiksel olarak önerme.
+
+Zıtlıkların Sinerjisi: Tamamen zıt görüşlere sahip ama akademik olarak birbirini besleyecek profilleri münazara etkinliklerinde eşleştirme.
+
+Anlık Karakter ve Profilleme Çıkarımları
+11. Sandalye Profillemesi: Sürekli arka köşeye oturan, yorum yapmayan ama etkinliklere tam puan veren kişinin "Gözlemci/İçe Dönük" olarak etiketlenmesi.
+12. Ön Sıra Liderliği: Hep ön sıraya oturan, uzun yorumlar yazan ve etkinlik çıkışını geç yapan (soru soran) kişilerin "Girişimci/Aktif" olarak profillenmesi.
+13. Stres ve Tükenmişlik (Burnout) Analizi: Gece 03:00'te aktif olup sabah 08:00'de QR okutan kişideki enerji düşüklüğünü doğrudan "uykusuzluğa" bağlama.
+14. Bilişsel Esneklik Skoru: Kendi alanının dışındaki ders/konferanslara katılıp o konularda sosyal medyada post atanların belirlenmesi.
+15. Otorite Algısı: Yöneticiden gelen bir duyuruya anında reaksiyon verenler ile saatler sonra okuyanlar arasındaki itaat/bağımsızlık analizi.
+16. Karar Alma Hızı: Canlı anketlere 3 saniye içinde cevap verenler ile 30 saniyede cevap verenlerin refleks analizi.
+17. Duygusal Zeka (EQ) Tahmini: Başkalarının postlarına destekleyici (Tebrikler, Harika) yorumlar yapma hacmi üzerinden EQ ölçümü.
+18. Görsel vs Metinsel Öğrenici: Sadece fotoğraflı/videolu gönderilerde duraklayanlar ile uzun metinleri okuyanların ayrıştırılması.
+19. Dikkat Dağınıklığı Endeksi: Ders anında uygulamaya çok sık gir-çık yapanların ve sosyal akışı yenileyenlerin tespit edilmesi.
+20. Gölge Lider Tespiti: Resmi bir görevi olmamasına rağmen, attığı bir gönderi kampın büyük bir kısmını yönlendirebilen kanaat önderlerinin bulunması.
+
+Anlık Yönetici İstihbaratı ve Kök Neden (Root-Cause)
+21. Düşük Enerji Teşhisi: Bir etkinliğin nabzı düştüğünde, sistemin anında "Önceki gece uyku ortalaması %30 düştü, sorun etkinlikte değil uykusuzlukta" raporu vermesi.
+22. Ders/Konferans Canlı Performansı: Ders bitmeden önce sosyal akışta o dersle ilgili atılan negatif kelimelerin (sıkıcı, uzun, anlamsız) tespit edilip hocaya anlık uyarı gitmesi.
+23. Yemekhane Memnuniyet Korelasyonu: Yemek sonrası atılan postlardaki duygu analizi ile o günkü menünün gizli memnuniyet oranının çıkarılması.
+24. Topluluk Trend Analizi: 400 kişinin o an en çok hangi konuyu (Örn: Akşamki maç, yarınki sunum) konuştuğunun kelime bulutu (Word Cloud) ile izlenmesi.
+25. Anomali Tespiti: Normalde çok aktif olan bir kullanıcının son 6 saatte hiçbir dijital ayak izi bırakmamasını sisteme "Olası Sağlık/Moral Sorunu" olarak raporlama.
+26. Yoklama Kaçağı Analizi: Derste QR okutmayan kişilerin o an uygulamada (sosyal akışta) aktif olup olmadığının saptanması.
+27. Etkinlik Çakışma Optimizasyonu: Hangi iki atölyenin katılımcı kitlelerinin çok fazla kesiştiğini bulup, gelecek programlarda bu atölyeleri aynı saate koymama önerisi.
+28. Kolektif Stres Haritası: Kampın 3. gününde genel gerginlik artarsa (kullanılan negatif kelimelerden), yöneticilere "Serbest zaman molası verin" önerisinin sunulması.
+29. Yapay Zeka Mentor Kalibrasyonu: İlerleyen yıllarda hangi tip öğrencilerin hangi tip mentorlarla daha yüksek akademik çıktı ürettiğinin Yatırım Getirisi (ROI) analizi.
+30. Sessiz Çoğunluk (Silent Majority) Analizi: Hiç yorum yapmayan ama anketlere düşük puan veren %60'lık kitlenin asıl sorunlarının NLP (Doğal Dil İşleme) ile çözümlenmesi.
+
+Akademik, Gelişim ve Etki (Impact) Analizleri
+31. Öğrenme Eğrisi Hızı: İlk gün sorulan temel soruların, 4. gün yerini ne kadar karmaşık teknik tartışmalara bıraktığının ölçümü.
+32. Fikir Kuluçka Süresi: Bir projenin sosyal ağda ilk zikredildiği an ile o fikrin etrafında bir ekibin toplanması arasında geçen sürenin analizi.
+33. Bilgi Yayılım Hızı (Viralite): Akademik bir dökümanın veya önemli bir bilginin 400 kişiye organik olarak ulaşma hızı.
+34. Çoklu Disiplin Skoru: Bir kullanıcının ilgi alanı "yazılım" iken, kamp sonunda "psikoloji" etiketli insanlarla ne kadar bağ kurduğunun gelişimi.
+35. Mentor Verimlilik Karnesi: Hangi mentorun grubundaki öğrencilerin sosyal medyada daha akademik ve pozitif paylaşımlar yaptığının ölçümü.
+36. Kelime Dağarcığı Evrimi: Kamp başlangıcı ve bitişi arasında kullanıcıların profesyonel terminolojiyi (Örn: İnovasyon, Sinerji, Optimizasyon) kullanım artışı.
+37. Ekip İçi Çatışma Tahmini: Grup üyelerinin birbirlerinin postlarına verdikleri "Beğenmeme" veya pasif-agresif tepkilerden yaklaşan bir proje krizini önceden tahmin etme.
+38. Mikro-İlgi Alanı Tespiti: Genel "Teknoloji" yerine, paylaşımlardan kişinin spesifik olarak "Eğitim Teknolojileri" ile ilgilendiğinin çıkartılıp buna göre yönlendirilmesi.
+39. Pasif Öğrenme Skoru: Etkinliklerde söz almayan ama sonrasında o etkinlikle ilgili en detaylı notları/postları paylaşan derin düşünürlerin tespiti.
+40. Dönüşüm (Transformation) Oranı: İçe dönük olarak kampa katılan birinin, kamp sonunda başlattığı anlamlı sohbet sayısındaki yüzdesel artış.
+
+Sistem Optimizasyonu ve Modüler Gelecek Hazırlığı
+41. Form Yorgunluğu (Survey Fatigue) Optimizasyonu: Kullanıcıların kaçıncı pop-up sorudan sonra rastgele basmaya başladığının tespiti.
+42. UI/UX Isı Haritası Çıkarımı: Öğrencilerin uygulamanın en çok hangi modülünü kullandığına bakarak Genç_Vizyon şablonunun iyileştirilmesi.
+43. Şablon Uyumluluk Skoru: Elde edilen verilerin ne kadarının ileride Askeri veya Şirket şablonlarına direkt aktarılabileceğinin modülerlik testi.
+44. Gamification (Oyunlaştırma) Etkisi: Puan veya rozet verildiğinde sistemdeki etkileşimin % kaç arttığının davranışsal analizi.
+45. Ollama Doğruluk Testi: AI'ın "Bu grup anlaşamıyor" tahmini ile kamp sonu anketlerindeki gerçek sonuçların karşılaştırılarak yerel modelin eğitilmesi.
+46. Bağlantı Kopma (Churn) Riski: Etkinlikler bitip herkes odasına çekildiğinde uygulamayı tamamen terk edenlerin dijital kopuş analizi.
+47. Tepki Eşiği Belirleme: Bir gönderinin "trend" olması için gereken minimum beğeni/yorum sayısının matematiksel sabiti.
+48. Algoritmik Balon (Echo-Chamber) Tespiti: Sadece aynı görüşteki insanların sürekli birbirini beğendiği kapalı grupların tespiti ve AI tarafından farklı kişilerin önerilmesiyle bu balonun patlatılması.
+49. Biyometrik Olmayan Yorgunluk Tespiti: Akıllı saat veya GPS kullanmadan, sadece yazım hatalarındaki artış ve kaydırma hızına bakarak fiziksel yorgunluk tespiti.
+50. Kümülatif Vizyon Endeksi: Tüm bu maddelerin sonunda, sistemin katılımcıya sağladığı toplam akademik, sosyal ve kişisel katma değerin "Tekil Vizyon Skoru" olarak hesaplanması.

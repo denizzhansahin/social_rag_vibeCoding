@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Neo4j Graph Database
+  neo4j:
+    image: neo4j:5.15.0
+    ports:
+      - "7474:7474" # HTTP
+      - "7687:7687" # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/palantir_secret_password
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
+      - neo4j_plugins:/plugins
+    networks:
+      - palantir_net
+
+  # NestJS API Gateway & Main Backend
+  nestjs-api:
+    build: 
+      context: ./backend/nestjs
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=palantir_secret_password
+      - PYTHON_SERVICE_URL=http://python-ai:8000
+    depends_on:
+      - neo4j
+      - python-ai
+    networks:
+      - palantir_net
+
+  # Python AI & Data Processing Service
+  python-ai:
+    build:
+      context: ./backend/python
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=palantir_secret_password
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - neo4j
+    networks:
+      - palantir_net
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_import:
+  neo4j_plugins:
+
+networks:
+  palantir_net:
+    driver: bridge

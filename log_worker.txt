@@ -1,0 +1,873 @@
+2026-04-13 23:13:46,286 [INFO] ============================================================
+2026-04-13 23:13:46,286 [INFO] 🚀 V-RAG AI Worker başlatılıyor...
+2026-04-13 23:13:46,286 [INFO] ============================================================
+2026-04-13 23:13:46,286 [INFO] 
+📡 Bağlantı Durumları:
+2026-04-13 23:13:46,286 [INFO]    PostgreSQL: ✅
+2026-04-13 23:13:46,286 [INFO]    Redis:      ✅
+2026-04-13 23:13:46,286 [INFO]    Qdrant:     ✅
+2026-04-13 23:13:46,286 [INFO]    Neo4j:      ✅
+2026-04-13 23:13:46,286 [INFO] 
+🤖 Ollama Durumu:
+2026-04-13 23:13:46,310 [INFO] 
+⏳ Redis kuyruğu dinleniyor: 'ai_task_queue'
+2026-04-13 23:13:46,311 [INFO]    (NestJS'ten veya Redis CLI'dan görev bekleniyor...)
+
+2026-04-13 23:33:25,888 [ERROR] 
+==================================================
+2026-04-13 23:33:25,888 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:25,895 [ERROR] Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 536, in execute_command
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 540, in <lambda>
+    lambda error: self._disconnect_raise(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 526, in _disconnect_raise
+    raise error
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 537, in <lambda>
+    lambda: self._send_command_parse_response(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 513, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 553, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 500, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 115, in readline
+    self._read_from_socket()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+2026-04-13 23:33:25,895 [ERROR] ==================================================
+
+2026-04-13 23:33:30,898 [ERROR] 
+==================================================
+2026-04-13 23:33:30,898 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:30,900 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:30,900 [ERROR] ==================================================
+
+2026-04-13 23:33:35,905 [ERROR] 
+==================================================
+2026-04-13 23:33:35,906 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:35,908 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:35,908 [ERROR] ==================================================
+
+2026-04-13 23:33:40,913 [ERROR] 
+==================================================
+2026-04-13 23:33:40,914 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:40,915 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:40,915 [ERROR] ==================================================
+
+2026-04-13 23:33:45,919 [ERROR] 
+==================================================
+2026-04-13 23:33:45,920 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:45,921 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:45,921 [ERROR] ==================================================
+
+2026-04-13 23:33:50,924 [ERROR] 
+==================================================
+2026-04-13 23:33:50,924 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:50,925 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:50,925 [ERROR] ==================================================
+
+2026-04-13 23:33:55,929 [ERROR] 
+==================================================
+2026-04-13 23:33:55,929 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:33:55,931 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:33:55,931 [ERROR] ==================================================
+
+2026-04-13 23:34:00,937 [ERROR] 
+==================================================
+2026-04-13 23:34:00,937 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:00,938 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:00,939 [ERROR] ==================================================
+
+2026-04-13 23:34:05,945 [ERROR] 
+==================================================
+2026-04-13 23:34:05,945 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:05,946 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:05,947 [ERROR] ==================================================
+
+2026-04-13 23:34:10,944 [ERROR] 
+==================================================
+2026-04-13 23:34:10,944 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:10,945 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:10,945 [ERROR] ==================================================
+
+2026-04-13 23:34:15,942 [ERROR] 
+==================================================
+2026-04-13 23:34:15,942 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:15,945 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:15,945 [ERROR] ==================================================
+
+2026-04-13 23:34:20,946 [ERROR] 
+==================================================
+2026-04-13 23:34:20,947 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:20,948 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:20,948 [ERROR] ==================================================
+
+2026-04-13 23:34:25,949 [ERROR] 
+==================================================
+2026-04-13 23:34:25,949 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:25,951 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:25,951 [ERROR] ==================================================
+
+2026-04-13 23:34:30,952 [ERROR] 
+==================================================
+2026-04-13 23:34:30,953 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:30,954 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:30,954 [ERROR] ==================================================
+
+2026-04-13 23:34:35,956 [ERROR] 
+==================================================
+2026-04-13 23:34:35,956 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:34:35,957 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:34:35,957 [ERROR] ==================================================
+
+2026-04-13 23:45:29,404 [ERROR] 
+==================================================
+2026-04-13 23:45:29,405 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:45:29,407 [ERROR] Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 536, in execute_command
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 540, in <lambda>
+    lambda error: self._disconnect_raise(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 526, in _disconnect_raise
+    raise error
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 537, in <lambda>
+    lambda: self._send_command_parse_response(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 513, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 553, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 500, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 115, in readline
+    self._read_from_socket()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+2026-04-13 23:45:29,407 [ERROR] ==================================================
+
+2026-04-13 23:45:34,413 [ERROR] 
+==================================================
+2026-04-13 23:45:34,413 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:45:34,414 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:45:34,414 [ERROR] ==================================================
+
+2026-04-13 23:45:39,416 [ERROR] 
+==================================================
+2026-04-13 23:45:39,416 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:45:39,416 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:45:39,416 [ERROR] ==================================================
+
+2026-04-13 23:45:44,418 [ERROR] 
+==================================================
+2026-04-13 23:45:44,418 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-13 23:45:44,418 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-13 23:45:44,418 [ERROR] ==================================================
+
+2026-04-14 00:28:29,676 [INFO] 
+📬 Yeni Görev Alındı: handle_user_onboarding
+2026-04-14 00:29:31,196 [INFO] 
+📬 Yeni Görev Alındı: handle_user_onboarding
+2026-04-14 00:43:09,127 [INFO] 
+📬 Yeni Görev Alındı: handle_user_onboarding
+2026-04-14 01:46:59,915 [INFO] 
+📬 Yeni Görev Alındı: handle_user_onboarding
+2026-04-14 01:51:31,543 [ERROR] 
+==================================================
+2026-04-14 01:51:31,544 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-14 01:51:31,546 [ERROR] Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 536, in execute_command
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 540, in <lambda>
+    lambda error: self._disconnect_raise(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 526, in _disconnect_raise
+    raise error
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 537, in <lambda>
+    lambda: self._send_command_parse_response(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 513, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 553, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 500, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 115, in readline
+    self._read_from_socket()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/_parsers/socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+2026-04-14 01:51:31,547 [ERROR] ==================================================
+
+2026-04-14 01:51:36,557 [ERROR] 
+==================================================
+2026-04-14 01:51:36,558 [ERROR] 🔥 KRİTİK HATA! Ana döngüde bir sorun oluştu:
+2026-04-14 01:51:36,561 [ERROR] Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 264, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 265, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 627, in _connect
+    raise err
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 615, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/denizhan/Desktop/vizyon_kampi/ai_worker/main.py", line 616, in main
+    message = redis_client.brpop(REDIS_QUEUE_NAME, timeout=1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/commands/core.py", line 2615, in brpop
+    return self.execute_command("BRPOP", *keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/anaconda3/envs/ai_core/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.
+
+2026-04-14 01:51:36,562 [ERROR] ==================================================
+
+2026-04-14 01:51:37,050 [WARNING] Received signal 15, shutting down gracefully...

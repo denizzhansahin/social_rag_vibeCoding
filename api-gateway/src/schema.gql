@@ -1,0 +1,618 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+enum ActionType {
+  abandoned
+  answered
+  bookmarked
+  downvoted
+  ignored
+  liked
+}
+
+type AgentChatLog {
+  adminId: String!
+  aiResponseText: String
+  contextUsed: JSON
+  createdAt: DateTime!
+  id: ID!
+  queryText: String!
+  status: String!
+  updatedAt: DateTime!
+}
+
+input AskPalantirInput {
+  adminId: String!
+  query: String!
+}
+
+input AssignMemberInput {
+  groupId: String!
+  userId: String!
+}
+
+type AttendanceByType {
+  avgAttendance: Float
+  eventCount: Int!
+  eventType: String!
+}
+
+type AttendanceStats {
+  absent: Int!
+  late: Int!
+  onTime: Int!
+  total: Int!
+}
+
+type AttendanceTrendEntry {
+  eventId: String!
+  eventType: String!
+  lateCount: Int!
+  onTimeCount: Int!
+  startTime: DateTime!
+  title: String!
+  totalAttendance: Int!
+}
+
+type AuthPayload {
+  token: String!
+  user: AuthUser!
+}
+
+type AuthUser {
+  cognitiveProfile: JSON
+  email: String!
+  groupId: String
+  hasCompletedOnboarding: Boolean
+  id: ID!
+  performanceMetrics: JSON
+  role: String!
+  socialLinks: JSON
+  status: String
+  telemetrySummary: JSON
+}
+
+type ContentEngagement {
+  action: ActionType!
+  behavioralMetrics: JSON
+  id: ID!
+  interactedAt: DateTime
+  nature: InteractionNature!
+  objectId: String!
+  responseData: JSON
+  seenAt: DateTime!
+  userId: String!
+}
+
+input CreateContentEngagementInput {
+  action: ActionType!
+
+  """JSON string of behavioral metrics"""
+  behavioralMetrics: String
+  interactedAt: DateTime
+  nature: InteractionNature!
+  objectId: String!
+
+  """JSON string of response payload"""
+  responseData: String
+  seenAt: DateTime!
+  userId: String!
+}
+
+input CreateEvaluationInput {
+  category: EvaluationCategory!
+  evaluatorId: String!
+  rawMentorNote: String
+  score1to5: Int
+  score1to100: Int
+  targetId: String!
+  targetType: EvaluationTargetType!
+}
+
+input CreateEventInput {
+  createdBy: String!
+  description: String
+  endTime: DateTime
+  eventType: String! = "workshop"
+  groupId: String
+  location: String
+  metadata: JSON
+  startTime: DateTime!
+  title: String!
+}
+
+input CreateGroupInput {
+  eventId: String
+  mentorId: String
+  name: String!
+}
+
+input CreatePostInput {
+  authorId: String!
+  contentText: String!
+  groupId: String
+  isPinned: Boolean! = false
+  isSystem: Boolean! = false
+  metadata: JSON
+  postType: String! = "text"
+  scope: String! = "global"
+}
+
+input CreateQuestionInput {
+  options: JSON
+  orderIndex: Int! = 0
+  questionText: String!
+  questionType: String!
+}
+
+input CreateSocialObjectInput {
+  createdBy: String!
+  objectType: String!
+  targetRules: JSON
+  uiPayload: JSON
+}
+
+input CreateSpatialTemporalLogInput {
+  delayMinutes: Int
+  expectedTime: DateTime
+  physicalZone: String!
+  punctuality: PunctualityStatus!
+  scanTime: DateTime!
+  sessionId: String!
+
+  """JSON string of spatial context (e.g. concurrent scans)"""
+  spatialContext: String
+  terminalId: String!
+  userId: String!
+}
+
+input CreateTelemetryStreamInput {
+  eventType: TelemetryEventType!
+
+  """JSON string of metrics payload"""
+  metrics: String
+  sessionId: String!
+  targetPath: String!
+  userId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DetailedGroupMember {
+  cognitiveProfile: JSON
+  computedTags: JSON
+  email: String!
+  id: String!
+  joinedAt: DateTime
+  lastLoginAt: DateTime
+  role: String!
+  status: String
+}
+
+type DetailedUserProfile {
+  attendedEvents: JSON
+  cognitiveProfile: JSON
+  computedTags: JSON
+  email: String!
+  groups: JSON
+  id: String!
+  lastLoginAt: DateTime
+  mentorEvaluations: JSON
+  performanceMetrics: JSON
+  recentAttendances: JSON
+  recentEngagements: JSON
+  role: String!
+  socialMedia: JSON
+  status: String
+  surveys: JSON
+  telemetrySummary: JSON
+}
+
+type Evaluation {
+  aiExtractedInsights: String
+  category: EvaluationCategory!
+  createdAt: DateTime!
+  evaluatorId: String!
+  id: ID!
+  rawMentorNote: String
+  score1to5: Int
+  score1to100: Int
+  targetId: String!
+  targetType: EvaluationTargetType!
+}
+
+enum EvaluationCategory {
+  behavioral
+  milestone
+  team_dynamics
+  technical_skills
+}
+
+enum EvaluationTargetType {
+  EVENT
+  GROUP
+  USER
+}
+
+type Event {
+  assignedGroups: [Group!]
+  assignments: [EventAssignment!]
+  createdAt: DateTime!
+  createdBy: String
+  description: String
+  endTime: DateTime
+  eventGroups: [EventGroup!]
+  eventType: String!
+  groupId: String
+  id: ID!
+  isActive: Boolean!
+  location: String
+  metadata: JSON
+  startTime: DateTime!
+  title: String!
+}
+
+type EventAssignment {
+  createdAt: DateTime!
+  eventId: String!
+  id: ID!
+  notes: String
+  role: EventAssignmentRole!
+  userId: String!
+}
+
+enum EventAssignmentRole {
+  MENTOR
+  PARTICIPANT
+  TEACHER
+}
+
+type EventDetail {
+  assignedGroups: [Group!]
+  assignments: [EventAssignment!]
+  attendance: JSON!
+  avgFeedbackScore: Float
+  avgMentorScore: Float
+  engagements: JSON!
+  feedbackCount: Int!
+  mentorEvalCount: Int!
+}
+
+type EventGroup {
+  createdAt: DateTime!
+  eventId: String!
+  groupId: String!
+  id: ID!
+}
+
+type FeedPost {
+  attachments: JSON
+  authorId: String!
+  contentText: String
+  createdAt: DateTime
+  groupId: String
+  id: ID!
+  isPinned: Boolean
+  isSystem: Boolean
+  metadata: JSON
+  postType: String
+  reactions: JSON
+  scope: String
+}
+
+type GraphLink {
+  label: String
+  source: String!
+  target: String!
+}
+
+type GraphNode {
+  id: String!
+  label: String
+  name: String
+  type: String
+}
+
+type Group {
+  aiInsights: JSON
+  assignedEvents: [Event!]
+  createdAt: DateTime!
+  eventId: String
+  id: ID!
+  members: [String!]
+  mentorId: String
+  mentors: [String!]
+  mentorsDetailed: [GroupMentor!]
+  metadata: JSON
+  name: String!
+}
+
+type GroupMember {
+  groupId: String!
+  id: ID!
+  joinedAt: DateTime!
+  userId: String!
+}
+
+type GroupMentor {
+  groupId: String!
+  isPrimary: Boolean!
+  mentorId: String!
+  mentorProfile: JSON
+}
+
+type GroupStats {
+  avgLeadership: Float!
+  avgPunctuality: Float!
+  avgStress: Float!
+  engagementBreakdown: JSON!
+  memberCount: Int!
+}
+
+enum InteractionNature {
+  explicit
+  friction
+  implicit
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type MatchingResult {
+  id: ID!
+  matchedAt: DateTime!
+  name: String
+  role: String
+  similarityScore: Float!
+  trait: String
+  userAId: String!
+  userAName: String
+  userBId: String!
+  userBName: String
+}
+
+type MiniProfile {
+  cognitiveProfile: JSON
+  computedTags: JSON
+  email: String!
+  engagementStyle: String!
+  groups: [String!]!
+  id: String!
+  lastAction: JSON
+  lastLocation: JSON
+  role: String!
+  stressIndex: Float!
+  traits: [String!]!
+}
+
+type Mutation {
+  addComment(authorName: String!, postId: String!, text: String!, userId: String!): FeedPost!
+  addMentorToGroup(groupId: String!, isPrimary: Boolean! = false, mentorId: String!): GroupMentor!
+  addReaction(postId: String!, reactionType: String!, userId: String!): FeedPost!
+  askPalantirAgent(input: AskPalantirInput!): AgentChatLog!
+  assignGroupToEvent(eventId: ID!, groupId: ID!): EventGroup!
+  assignToEvent(eventId: ID!, notes: String, role: EventAssignmentRole!, userId: ID!): EventAssignment!
+  assignUserToGroup(input: AssignMemberInput!): GroupMember!
+  batchCreateTelemetry(events: [JSON!]!): Boolean!
+  createEngagement(input: CreateContentEngagementInput!): ContentEngagement!
+  createEvaluation(createEvaluationInput: CreateEvaluationInput!): Evaluation!
+  createEvent(input: CreateEventInput!): Event!
+  createFeedPost(input: CreatePostInput!): FeedPost!
+  createGroup(input: CreateGroupInput!): Group!
+  createOnboardingQuestion(input: CreateQuestionInput!): OnboardingQuestion!
+  createSocialObject(input: CreateSocialObjectInput!): SocialObject!
+  createSpatialLog(input: CreateSpatialTemporalLogInput!): SpatialTemporalLog!
+  createTelemetryStream(input: CreateTelemetryStreamInput!): TelemetryStream!
+  createUser(cognitiveProfile: JSON, email: String!, password: String, role: String!): AuthUser!
+  deleteEvent(id: ID!): Boolean!
+  deleteFeedPost(postId: String!): Boolean!
+  deleteGroup(id: String!): Boolean!
+  deleteOnboardingQuestion(id: String!): Boolean!
+  deleteUser(userId: String!): AuthUser!
+  fixDatabaseConstraint: String!
+  login(input: LoginInput!): AuthPayload!
+  quickCheckin(eventCode: String!, userId: String!): SpatialTemporalLog!
+  removeMentorFromGroup(groupId: String!, mentorId: String!): Boolean!
+  removeReaction(postId: String!, reactionType: String!, userId: String!): FeedPost!
+  removeUserFromGroup(groupId: String!, userId: String!): Boolean!
+  requestGroupInsight(groupId: String!): String!
+  submitOnboarding(input: SubmitOnboardingInput!): Boolean!
+  toggleOnboardingQuestion(id: String!, isActive: Boolean!): OnboardingQuestion!
+  togglePostPin(isPinned: Boolean!, postId: String!): FeedPost!
+  triggerFullSync: String!
+  unassignGroupToEvent(eventId: ID!, groupId: ID!): Boolean!
+  unassignUserFromEvent(eventId: ID!, userId: ID!): Boolean!
+  updateEvent(id: ID!, input: UpdateEventInput!): Event!
+  updateGroup(id: String!, input: UpdateGroupInput!): Group!
+  updateGroupPrimaryMentor(groupId: String!, mentorId: String!): Boolean!
+  updateOnboardingQuestion(input: UpdateQuestionInput!): OnboardingQuestion!
+  updateOnboardingResponse(questionId: String!, responseData: String!, userId: String!): OnboardingResponse!
+  updateUser(updates: JSON!, userId: String!): AuthUser!
+}
+
+type NetworkGraph {
+  links: [GraphLink!]!
+  nodes: [GraphNode!]!
+}
+
+input OnboardingAnswerInput {
+  questionId: ID!
+  responseData: String!
+}
+
+type OnboardingQuestion {
+  id: ID!
+  isActive: Boolean!
+  options: JSON!
+  orderIndex: Int!
+  questionText: String!
+  questionType: String!
+}
+
+type OnboardingResponse {
+  id: ID!
+  questionId: String!
+  responseData: String!
+  userId: String!
+}
+
+enum PunctualityStatus {
+  absent
+  early
+  late
+  on_time
+}
+
+type Query {
+  adminChatLogs(adminId: String!): [AgentChatLog!]!
+  evaluation(id: String!): Evaluation
+  evaluations: [Evaluation!]!
+  evaluationsByTarget(targetId: String!): [Evaluation!]!
+  getActiveOnboardingQuestions: [OnboardingQuestion!]!
+  getAllOnboardingQuestions: [OnboardingQuestion!]!
+  getAllOnboardingResponses: [OnboardingResponse!]!
+  getAllUsers: [AuthUser!]!
+  getAttendanceByType: [AttendanceByType!]!
+  getAttendanceStats(sessionId: String!): AttendanceStats!
+  getAttendanceTrend: [AttendanceTrendEntry!]!
+  getBridgeNodes: [GraphNode!]!
+  getChatLog(id: String!): AgentChatLog
+  getConflictPairs: [GraphLink!]!
+  getDetailedUserProfile(userId: String!): DetailedUserProfile
+  getDiscoveryRecommendations(userId: String!): [MatchingResult!]!
+  getEvent(id: String!): Event
+  getEventAttendance(sessionId: String!): [SpatialTemporalLog!]!
+  getEventDetail(eventId: String!): EventDetail!
+  getEvents: [Event!]!
+  getEventsForUser(userId: String!): [Event!]!
+  getFeedPost(postId: String!): FeedPost
+  getFilteredGraph(id: String!, type: String): NetworkGraph!
+  getGlobalFeed: [FeedPost!]!
+  getGlobalTelemetryStats: [JSON!]!
+  getGroup(id: String!): Group
+  getGroupFeed(groupId: String!): [FeedPost!]!
+  getGroupMembers(groupId: String!): [GroupMember!]!
+  getGroupMembersDetailed(groupId: String!): [DetailedGroupMember!]!
+  getGroupMentors(groupId: String!): [GroupMentor!]!
+  getGroupNetworkGraph(groupId: String!): NetworkGraph!
+  getGroupStats(groupId: String!): GroupStats!
+  getGroups: [Group!]!
+  getGroupsByEvent(eventId: String!): [Group!]!
+  getHomeFeed: [SocialObject!]!
+  getInfluencers: [GraphNode!]!
+  getIsolatedUsers: [GraphNode!]!
+  getMiniProfile(userId: String!): MiniProfile
+  getMyMatches(userId: String!): [MatchingResult!]!
+  getNetworkGraph: NetworkGraph!
+  getParticipantConnections(userName: String!): NetworkGraph!
+  getParticipantProfile(userId: String!): AuthUser
+  getPersistentMatches: [MatchingResult!]!
+  getPotentialMatches: [GraphLink!]!
+  getUserAttendance(userId: String!): [SpatialTemporalLog!]!
+  getUserEngagements(userId: String!): [ContentEngagement!]!
+  getUserOnboardingResponses(userId: String!): [OnboardingResponse!]!
+  getUsersByStatus(status: String!): [UserWithStatus!]!
+  getUsersWithStatus: [UserWithStatus!]!
+  recentEngagements: [ContentEngagement!]!
+  recentSpatialLogs: [SpatialTemporalLog!]!
+  recentTelemetries: [TelemetryStream!]!
+}
+
+type SocialObject {
+  createdAt: DateTime!
+  createdBy: String!
+  expiresAt: DateTime
+  id: ID!
+  objectType: String!
+  targetRules: JSON
+  uiPayload: JSON
+}
+
+type SpatialTemporalLog {
+  createdAt: DateTime!
+  delayMinutes: Int
+  expectedTime: DateTime
+  id: ID!
+  physicalZone: String!
+  punctuality: PunctualityStatus!
+  scanTime: DateTime!
+  sessionId: String!
+  spatialContext: String
+  terminalId: String!
+  userId: String!
+}
+
+input SubmitOnboardingInput {
+  answers: [OnboardingAnswerInput!]!
+  userId: ID!
+}
+
+enum TelemetryEventType {
+  click_reflex
+  scroll_activity
+  session_end
+  session_start
+  typing_dynamics
+  viewport_visibility
+}
+
+type TelemetryStream {
+  createdAt: DateTime!
+  eventType: TelemetryEventType!
+  id: ID!
+  metrics: String
+  sessionId: String!
+  targetPath: String!
+  userId: String!
+}
+
+input UpdateEventInput {
+  description: String
+  endTime: DateTime
+  eventType: String
+  isActive: Boolean
+  location: String
+  metadata: JSON
+  startTime: DateTime
+  title: String
+}
+
+input UpdateGroupInput {
+  metadata: JSON
+  name: String
+}
+
+input UpdateQuestionInput {
+  id: ID!
+  isActive: Boolean
+  options: JSON
+  orderIndex: Int
+  questionText: String
+  questionType: String
+}
+
+type UserWithStatus {
+  cognitiveProfile: JSON
+  computedTags: JSON
+  email: String!
+  groupId: String
+  id: String!
+  lastLoginAt: DateTime
+  performanceMetrics: JSON
+  presenceStatus: String!
+  role: String!
+  socialLinks: JSON
+  status: String
+  telemetrySummary: JSON
+}

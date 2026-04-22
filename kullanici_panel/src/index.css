@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* ============================================
+   V-RAG Vizyon Analitik — Global Styles
+   ============================================ */
+
+/* Font System */
+:root {
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+
+  /* V-RAG Color System */
+  --dark-bg: #0d1117;
+  --dark-surface: #161b22;
+  --dark-border: #30363d;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --neon-green: #238636;
+  --neon-green-hover: #2ea043;
+  --ice-blue: #58a6ff;
+  --coral-red: #f85149;
+  --amber: #d29922;
+  --purple: #8957e5;
+  --neon-mint: #10b981;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Scrollbar — Invisible & Smooth
+   ============================================ */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* ============================================
+   Custom Range Slider — iOS-Style
+   ============================================ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  background: linear-gradient(to right, #238636, #58a6ff);
+  border-radius: 999px;
+  opacity: 0.3;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #58a6ff;
+  border-radius: 50%;
+  margin-top: -8px;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.7), 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: linear-gradient(to right, #238636, #58a6ff);
+  border-radius: 999px;
+  opacity: 0.3;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: #58a6ff;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.5);
+}
+
+/* ============================================
+   Skeleton Loader Animation
+   ============================================ */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.18; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #30363d 0%, #484f58 50%, #30363d 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Confetti / Particle Burst
+   ============================================ */
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(80px) rotate(720deg) scale(0); opacity: 0; }
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: confetti-fall 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ============================================
+   Ripple Effect
+   ============================================ */
+@keyframes ripple-expand {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(88, 166, 255, 0.3);
+  animation: ripple-expand 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ============================================
+   Glow Effect
+   ============================================ */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(88, 166, 255, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(88, 166, 255, 0.4); }
+}
+
+.glow-card:hover {
+  animation: glow-pulse 2s infinite;
+}
+
+/* ============================================
+   Slide-in Animations
+   ============================================ */
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+/* ============================================
+   Badge Shine
+   ============================================ */
+@keyframes badge-shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.badge-shine {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: badge-shine 3s infinite;
+}
+
+/* ============================================
+   Activity Heatmap
+   ============================================ */
+.heatmap-cell {
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 10;
+}
+
+/* ============================================
+   Safe Area Padding (iOS)
+   ============================================ */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom), 8px);
+}
+
+/* ============================================
+   Number Counter Animation
+   ============================================ */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: count-up 0.5s ease-out;
+}
+
+/* ============================================
+   Emoji Bounce
+   ============================================ */
+@keyframes emoji-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.emoji-bounce {
+  animation: emoji-bounce 0.3s ease-out;
+}
+
+/* ============================================
+   Progress Bar Fill
+   ============================================ */
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+
+.animate-progress {
+  animation: progress-fill 1s ease-out;
+}
+
+/* ============================================
+   Typewriter effect for display headings
+   ============================================ */
+h1, h2 {
+  font-family: var(--font-display);
+}

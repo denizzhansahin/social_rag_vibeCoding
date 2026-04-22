@@ -1,0 +1,74 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment files
+#.env
+#.env.local
+#.env.production.local
+#.env.development.local
+#.env.test.local
+#!.env.example
+
+# Build outputs
+dist/
+*/dist/
+build/
+*/build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# PID files
+*pid.txt
+*/*pid.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production artifacts
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+ai_worker/ai_worker.log
+
+# Docker
+docker-compose.override.yml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS X
+.Spotlight-V100
+.Trashes

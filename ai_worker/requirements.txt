@@ -1,0 +1,9 @@
+# V-RAG AI Worker Dependencies
+# Production-ready pinned versions
+psycopg2-binary==2.9.9
+redis==5.0.1
+qdrant-client==1.7.0
+neo4j==5.15.0
+requests==2.31.0
+pydantic==2.5.2
+python-dotenv==1.0.0
