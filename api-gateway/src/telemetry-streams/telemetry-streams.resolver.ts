@@ -3,7 +3,7 @@ import { GraphQLJSON } from 'graphql-type-json';
 import { TelemetryStreamsService } from './telemetry-streams.service';
 import { TelemetryStream } from './entities/telemetry-stream.entity';
 import { CreateTelemetryStreamInput } from './dto/create-telemetry-stream.input';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Resolver(() => TelemetryStream)
 export class TelemetryStreamsResolver {
   constructor(private readonly service: TelemetryStreamsService) {}

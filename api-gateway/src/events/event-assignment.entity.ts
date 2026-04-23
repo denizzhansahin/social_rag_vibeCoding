@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { EventEntity } from './event.entity';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Entity('event_assignments')
 export class EventAssignmentEntity {
   @PrimaryColumn('uuid', { default: () => 'gen_random_uuid()' })
@@ -25,3 +25,6 @@ export class EventAssignmentEntity {
   @JoinColumn({ name: 'event_id' })
   event: EventEntity;
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

@@ -3,7 +3,7 @@ import { Response } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Controller('media')
 export class MediaController {
   private readonly uploadDir = path.join(process.cwd(), 'uploads');
@@ -14,7 +14,7 @@ export class MediaController {
       fs.mkdirSync(this.uploadDir, { recursive: true });
     }
   }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   @Post('upload')
   async uploadMedia(
     @Body('base64') base64: string,
@@ -39,7 +39,7 @@ export class MediaController {
       if (buffer.length > 5 * 1024 * 1024) { // Absolute fallback max 5MB (Bknz: Implementation Plan)
          throw new HttpException('Dosya bedeni backend maks sınırını (5MB) aşıyor', HttpStatus.PAYLOAD_TOO_LARGE);
       }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
       fs.writeFileSync(filePath, buffer);
 
       return {
@@ -64,3 +64,5 @@ export class MediaController {
     return res.sendFile(filePath);
   }
 }
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

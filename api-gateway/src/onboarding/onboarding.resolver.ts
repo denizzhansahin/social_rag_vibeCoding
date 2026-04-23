@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { OnboardingService } from './onboarding.service';
 import { OnboardingQuestion, OnboardingResponse, SubmitOnboardingInput, CreateQuestionInput, UpdateQuestionInput } from './onboarding.model';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Resolver()
 export class OnboardingResolver {
   constructor(private readonly onboardingService: OnboardingService) {}
@@ -10,7 +10,7 @@ export class OnboardingResolver {
   async getActiveQuestions() {
     return this.onboardingService.getActiveQuestions();
   }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   @Query(() => [OnboardingQuestion], { name: 'getAllOnboardingQuestions' })
   async getAllQuestions() {
     return this.onboardingService.getAllQuestions();
@@ -20,7 +20,7 @@ export class OnboardingResolver {
   async getUserResponses(@Args('userId') userId: string) {
     return this.onboardingService.getUserResponses(userId);
   }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   @Query(() => [OnboardingResponse], { name: 'getAllOnboardingResponses' })
   async getAllResponses() {
     return this.onboardingService.getAllResponses();
@@ -40,7 +40,7 @@ export class OnboardingResolver {
   async deleteOnboardingQuestion(@Args('id') id: string) {
     return this.onboardingService.deleteQuestion(id);
   }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   @Mutation(() => OnboardingQuestion)
   async toggleOnboardingQuestion(
     @Args('id') id: string,
@@ -57,7 +57,7 @@ export class OnboardingResolver {
   ) {
     return this.onboardingService.updateResponse(userId, questionId, responseData);
   }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   @Mutation(() => Boolean)
   async submitOnboarding(@Args('input') input: SubmitOnboardingInput) {
     return this.onboardingService.submitOnboarding(input);

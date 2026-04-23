@@ -556,6 +556,7 @@ export const GET_FILTERED_GRAPH = gql`
 
 // ========================
 // 🤖 AI & INTELLIGENCE
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details. ----
 // ========================
 
 export const ASK_PALANTIR = gql`

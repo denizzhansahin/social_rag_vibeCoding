@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Fingerprint, Lock, Mail } from 'lucide-react';
 
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
+
+
 // GraphQL login mutation - Fixed to match NestJS @Args('input') structure
 const LOGIN_MUTATION = `
   mutation Login($email: String!, $password: String!) {
@@ -17,6 +20,8 @@ const LOGIN_MUTATION = `
     }
   }
 `;
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 
 const GRAPHQL_URL = import.meta.env.VITE_GRAPHQL_URL || '/api/graphql';
 
@@ -78,7 +83,7 @@ export default function Login() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }; // ---- Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 
   return (
     <div className="min-h-screen bg-[#0d1117] flex items-center justify-center relative overflow-hidden">
@@ -165,3 +170,7 @@ export default function Login() {
     </div>
   );
 }
+
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

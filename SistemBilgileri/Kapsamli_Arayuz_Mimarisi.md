@@ -1,5 +1,5 @@
 # 🚀 V-RAG (Genç_Vizyon) AI Studio & LLM Ön-Yüz Geliştirme Kılavuzu
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 Bu belge; yapay zeka (Google AI Studio, Claude vb.) asistanların sistemi sıfırdan **React/** kullanarak hatasız kodlayabilmesi için hazırlanmış "Component Tree", "JSON Şema" ve "Prompt" dokümanıdır.
 
 **SİSTEMİN AMACI:** V-RAG, gençlere anket dolduruluyormuş hissi vermeyen, X (Twitter) vari akıcı bir sosyal medya platformudur. Arka planda telemetri kullanılarak mikro-davranışları (backspace, karar süresi) ölçer ve bir Neo4j Graph Network paneli üzerinden Gelişmiş Palantir İstihbaratı sağlar.

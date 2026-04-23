@@ -1,5 +1,5 @@
 Bu proje, **Gençlik ve Spor Bakanlığı Vizyon Kampı** gibi dinamik organizasyonlar için tasarlanmış, klasik "form doldurma" mantığını tamamen ortadan kaldıran, yaşayan bir **Etkinlik ve Katılımcı Yönetim Portalı**dır.
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 Sistemin temel mantığı; gençlerin yabancılık çekmeyeceği, hızlı ve eğlenceli bir **"Twitter/X" arayüzü kılıfı** altında, kampın tüm yönetimsel ihtiyaçlarını yapay zeka destekli analizlerle birleştirmektir.
 
 İşte projenin sunduğu çözüm ve fark yaratan noktalar:

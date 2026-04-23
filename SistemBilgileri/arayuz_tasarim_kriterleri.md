@@ -1,4 +1,5 @@
 # 🚀 Vizyon Analitik (Genç_Vizyon) - Arayüz Tasarım & Telemetri Kılavuzu
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 
 Bu doküman, Vizyon Analitik platformunun önyüz (Front-end) tasarımını yaparken dikkat etmeniz gereken mimari, etkileşim (UI/UX) ve veri toplama (Telemetri) gereksinimlerini çok detaylı bir şekilde açıklar. Sistem, anket izlenimi vermeyen bir **X (eski adıyla Twitter) vari sosyal medya feed'i** vizyonuyla inşa edilmiştir.
 

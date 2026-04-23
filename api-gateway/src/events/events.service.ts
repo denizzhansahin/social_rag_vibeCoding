@@ -6,7 +6,7 @@ import { EventAssignmentEntity } from './event-assignment.entity';
 import { EventGroupEntity } from './event-group.entity';
 import { CreateEventInput } from './event.model';
 import { FeedPostEntity } from '../feed-posts/feed-post.entity';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Injectable()
 export class EventsService {
   constructor(
@@ -255,3 +255,6 @@ export class EventsService {
 }
 
 
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

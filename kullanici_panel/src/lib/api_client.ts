@@ -2,7 +2,7 @@
  * V-RAG Production API Client
  * Environment-based URLs: Works in both dev and production
  */
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 // Environment-based URLs with localhost fallbacks
 // In production, the Express proxy at /api/graphql forwards to API Gateway
 const OLLAMA_URL = import.meta.env.VITE_OLLAMA_URL || '/api/ollama';
@@ -56,7 +56,7 @@ export async function checkOllamaHealth(): Promise<boolean> {
     return false;
   }
 }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 // --- Media Upload API ---
 export async function uploadMediaAPI(base64Data: string, mimeType: string): Promise<{ url: string, fileName: string }> {
   try {
@@ -495,6 +495,7 @@ export async function addReactionAPI(postId: string, userId: string, reactionTyp
   return result?.addReaction || null;
 }
 
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 export async function removeReactionAPI(postId: string, userId: string, reactionType: string) {
   const result = await graphqlRequest<{ removeReaction: any }>(`
     mutation RemoveReaction($postId: String!, $userId: String!, $reactionType: String!) {
@@ -613,7 +614,7 @@ export async function getOnboardingResponsesAPI(userId: string) {
 }
 
 // --- Initialize ---
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 export function initApiClient() {
   // Try syncing offline queue on startup
   retryOfflineQueue();
@@ -658,7 +659,7 @@ export async function getDiscoveryRecommendationsAPI(userId: string) {
   const data = await graphqlRequest<{ getDiscoveryRecommendations: any[] }>(query, { userId });
   return data?.getDiscoveryRecommendations || [];
 }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 export async function triggerMatchingSync() {
   const query = `
     mutation TriggerFullSync {

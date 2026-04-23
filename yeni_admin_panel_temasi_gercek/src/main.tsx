@@ -8,7 +8,7 @@ import './index.css';
 
 // Environment-based GraphQL URL - pointing directly to API Gateway
 const GRAPHQL_URL = import.meta.env.VITE_GRAPHQL_URL || '/api/graphql';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 // Auth link to inject JWT token
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('vrag_admin_jwt');
@@ -49,3 +49,6 @@ createRoot(document.getElementById('root')!).render(
     </ApolloProvider>
   </StrictMode>,
 );
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

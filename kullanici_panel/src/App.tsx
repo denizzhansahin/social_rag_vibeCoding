@@ -51,7 +51,7 @@ function AppRoutes() {
     </>
   );
 }
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 export default function App() {
   return (
     <AuthProvider>
@@ -65,3 +65,6 @@ export default function App() {
     </AuthProvider>
   );
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

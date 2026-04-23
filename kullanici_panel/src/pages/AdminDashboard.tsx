@@ -8,6 +8,10 @@ import { CreateSurveyForm } from '../components/Admin/CreateSurveyForm';
 import { SliderSurveyComponent } from '../components/Feed/SliderSurveyComponent';
 import { FreeTextPostComponent } from '../components/Feed/FreeTextPostComponent';
 
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
+
+
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
   const { posts } = useData();
@@ -121,3 +125,6 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

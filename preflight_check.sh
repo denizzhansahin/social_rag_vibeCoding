@@ -3,6 +3,7 @@
 # =====================================================
 # V-RAG Preflight Check Script
 # Verifies connectivity to all infra and AI components
+# Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 # =====================================================
 
 GREEN='\033[0;32m'
@@ -77,3 +78,5 @@ fi
 echo "-----------------------------------------------------"
 echo "✅ Infrastructure Check Complete"
 echo "-----------------------------------------------------"
+
+# // Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

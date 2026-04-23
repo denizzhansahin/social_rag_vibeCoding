@@ -14,7 +14,7 @@ export default function Profile() {
   const { posts, events, users } = useData();
   const [matches, setMatches] = useState<any[]>([]);
   const [isSyncing, setIsSyncing] = useState(false);
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
   const isMe = !id || id === 'me' || id === currentUser?.id;
   const user = isMe ? currentUser : users.find(u => u.id === id);
 
@@ -339,3 +339,6 @@ export default function Profile() {
     </div>
   );
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

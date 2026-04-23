@@ -1,7 +1,7 @@
 # 🧬 Vizyon Analitik: Kullanıcı ve Yönetici Paneli UI/UX Standartları
 
 Bu belge, sistemi geliştirecek tasarımcı ve Frontend yazılımcıları için iki farklı dünyanın çarpışmasını açıklar: **Gençlere hitap eden gamified (oyunlaştırılmış) akışkan bir Sosyal Algı Motoru** ile **Yöneticilere hitap eden siber/istihbarat (Palantir) analitik beyni.**
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 ---
 
 ## BÖLÜM 1: KULLANICI ARAYÜZÜ (GENÇ_VİZYON)

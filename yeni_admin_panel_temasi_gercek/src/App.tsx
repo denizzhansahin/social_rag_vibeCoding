@@ -60,3 +60,6 @@ export default function App() {
     </Router>
   );
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.

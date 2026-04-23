@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from './user.entity';
 import { LoginInput } from './dto/login.input';
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
 @Injectable()
 export class AuthService implements OnModuleInit {
   constructor(
@@ -51,7 +51,7 @@ export class AuthService implements OnModuleInit {
 
       const payload = { sub: user.id, email: user.email, role: user.role };
       const token = this.jwtService.sign(payload);
-
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
       // Fetch group ID for participant/mentor
       let groupId = null;
       try {
@@ -325,3 +325,6 @@ export class AuthService implements OnModuleInit {
     return this.userRepo.save(user);
   }
 }
+
+
+// Copyright (c) 2026 Denizhan Şahin. All Rights Reserved. See LICENSE file for details.
